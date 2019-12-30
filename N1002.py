@@ -18,8 +18,8 @@ Note:
 1 <= A[i].length <= 100
 A[i][j] is a lowercase letter
 """
-""" #1
-def Find_Common_Characters(A):
+
+def Find_Common_Characters1(A):
     A_set, res = [], []
     '''先求出A0和A1的交集，这个为最大集，也是模板'''
     A1_list = list(A[1])
@@ -37,7 +37,7 @@ def Find_Common_Characters(A):
             else:
                 each_list.remove(res[i])
     return A_set
-"""
+
 
 """
 '''#2： 利用Counter方法统计元素出现次数，并输出元素与其出现次数的字典，字典相交（&操作），获取到元素的最小出现次数'''
@@ -49,9 +49,9 @@ class Solution:
             res &= Counter(A[i])
         return list(res.elements())
 """
-"""
+
 '''#3 大体思路同#2，但没有使用collections库'''
-def Find_Common_Characters(A):
+def Find_Common_Characters3(A):
     ans = {}
     #将第一个字符串中所有元素及其出现的次数做成字典，作为模板存入ans中
     for each in A[0]:
@@ -74,7 +74,8 @@ def Find_Common_Characters(A):
     return res
 """
 #大神的代码，思路一样，但及其简练，收藏学习！
-def Find_Common_Characters(A):
+"""
+def Find_Common_Characters4(A):
     if not A:
         return []
 
@@ -91,4 +92,4 @@ def Find_Common_Characters(A):
 A = ["acabcddd","bcbdbcbd","baddbadb","cbdddcac","aacbcccd","ccccddda","cababaab","addcaccd"]
 A1 = ["bella","label","roller"]
 A2 = ["cool","lock","cook"]
-print(Find_Common_Characters(A1))
+print(Find_Common_Characters4(A2))
