@@ -35,17 +35,36 @@
 # >>> c | d                       # union:  max(c[x], d[x])
 # Counter({'a': 3, 'b': 2})
 # ————————————————
+##############################################################################
 
 
 # tip4: list to dict
 #  for item in nums:  #功能类似Counter，生成一个字典，key是列表元素，value是元素出现的次数
 #         dict_nums[item] = dict_nums.get(item, 0) + 1
 
-# tip5:
-#
+################################################################################
 
-# tip6:
+
+# tip5:  How to sort a Python dict by value
+# (== get a representation sorted by value)
+xs = {'a': 4, 'b': 3, 'c': 2, 'd': 1}
+
+output = sorted(xs.items(), key=lambda x: x[1])  # xs.items是可迭代对象，x 是每次迭代对象的items值
+print(output)
+# #[('d', 1), ('c', 2), ('b', 3), ('a', 4)]
 #
+#
+# # Or:
+#
+# import operator
+# output = sorted(xs.items(), key=operator.itemgetter(1))
+# print(output)
+# #[('d', 1), ('c', 2), ('b', 3), ('a', 4)]
+#########################################################################
+
+# tip6: 计算列表中元素位数为偶的个数
+# return len(nums) - sum((len(str(i))%2 for i in nums))
+# return sum((not(len(str(i))%2) for i in nums))
 
 # tip7:
 #
