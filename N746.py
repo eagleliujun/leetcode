@@ -30,3 +30,5 @@ def minCostClimbingStairs(cost):
 cost1 = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
 cost2 = [10, 15, 20]
 print(minCostClimbingStairs(cost2))
+cost = '122'
+cost.strip

@@ -71,6 +71,7 @@ print(output)
 
 # tip8:
 #
+'df'.isdecimal()
 
 # tip2:
 #

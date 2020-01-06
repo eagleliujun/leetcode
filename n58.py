@@ -14,6 +14,14 @@ Output: 5
 def lengthOfLastWord(s):
     return len((s.rstrip(' ')).rpartition(' ')[-1])
 
+def lengthOfLastWord2(s):
+    s1 = filter(list(s), ' ')
+    s2 = find
+    return
+
+
+
+
 
 s = 'hello world '
 print(lengthOfLastWord(s))
