@@ -55,6 +55,10 @@ def longestCommonPrefix2(strs):
     if len(strs[0]) == 0:
         return ""
     k = 0
+    # print(*(list(str2) for str2 in strs))
+    # print((str2 for str2 in strs))
+    # print(list(zip(*(list(str2) for str2 in strs))))
+    # print(list(zip((list(str2) for str2 in strs))))
     result = list(zip(*(list(str2) for str2 in strs)))
     res = ''
     for i in range(len(result)):
@@ -64,10 +68,31 @@ def longestCommonPrefix2(strs):
             res = res + result[i][0]
     return res
 
+def longestCommonPrefix3(strs):
+    if len(strs) == 0:
+        return ""
+    if len(strs) == 1:
+        return strs[0]
+    if len(strs[0]) == 0:
+        return ""
+    k = 0
+    # print(*(list(str2) for str2 in strs))
+    # print((str2 for str2 in strs))
+    # print(list(zip(*(list(str2) for str2 in strs))))
+    # print(list(zip((list(str2) for str2 in strs))))
+    result = list(zip(*(list(str2) for str2 in strs)))
+    result = list(zip(*list(map(list, strs))))
+    res = ''
+    for i in range(len(result)):
+        if len(set(result[i])) != 1:
+            break
+        else:
+            res = res + result[i][0]
+    return res
 
 x4 = ["",""]
 x1 = ["dog","racecar","car"]
 x2 = ["flower","flow","flight"]
 x3 = ["cc","c"]
 x4 = ["c","c"]
-print(longestCommonPrefix2(x2))
+print(longestCommonPrefix3(x2))

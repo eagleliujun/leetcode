@@ -32,7 +32,7 @@ def ugly_number1(num):  # 32ms  12.5M
     else:
         return False
 
-def ugly_number2(num):  没有成功。
+def ugly_number2(num):  #没有成功。
     if num <= 0:
         return False
     dec = True
@@ -41,15 +41,15 @@ def ugly_number2(num):  没有成功。
         dec = ugly_number2(num)
     if num % 3 == 0 and dec == True:
         num /= 3
-        dec =ugly_number2(num )
+        dec =ugly_number2(num)
     if num % 3 == 0 and dec == True:
         num /= 5
-        dec =ugly_number2(num )
-    if num == 1 and dec == True:
-        return True
-    else:
+        dec =ugly_number2(num)
+    if num != 1 and dec == False:
         return False
+    else:
+        return True
 
 
-x = 1024
+x = 1023
 print(ugly_number2(x))

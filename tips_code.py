@@ -67,7 +67,8 @@ print(output)
 # return sum((not(len(str(i))%2) for i in nums))
 
 # tip7:
-#
+# 三元表达式：for 和 if 的 结合
+# print(list(v ** 2 for v in l if v >= 10))
 
 # tip8:
 #
