@@ -59,8 +59,29 @@ def romanToInt1(s):
     return res
 
 
+def romanToInt2(s):
+    roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    roman_dict2 = {'IV': 4, 'IX': 9, 'XL': 40, 'XC': 90, 'CD': 400, 'CM': 900}
+    roman_dict3 = {'A'}
+    res = 0
+    skip = 0
+    first =s[0]
+    s_list = list(s[1:])
+    for key2, value2 in roman_dict2.items():
+        if s.find(key2) != -1:
+            s= s.split(key2)
+            res = res + int(value2)
+    for key1, value1 in roman_dict.items():
+        if s.find(key1) != -1:
+            mux = s.count(key1)
+            s =s.split(key1)
+            res = res + int(value1)*mux
+    return res
+
+
+
 s1 = 'MCMXCIV'
 s2 = 'III'
 s3 = 'LVIII'
 
-print(romanToInt(s2))
+print(romanToInt2(s1))
