@@ -18,16 +18,17 @@ Constraints:
 0 <= arr[i] <= 10^5
 """
 def findSpecialInteger(x):
-    list_lens = int(len(x) / 4 +1)
-    sum = 0
-    i =1
+    if len(x) == 1:
+        return 1
+    list_lens = int(len(x) / 4 + 1)
+    i = 1
     while i < len(x):
-        if x.count(x[i]) > list_lens:
-            return x[i]
+        if x.count(x[i]) < list_lens:
+            i += list_lens
         else:
-            i *= 4
+            return x[i]
 
-
+arr1 = [1,2,3,3]
 arr = [1,2,2,6,6,6,6,7,10]
-print(findSpecialInteger(arr))
+print(findSpecialInteger(arr1))
 print('fkjaslfkjlaf')
