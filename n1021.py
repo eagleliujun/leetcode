@@ -1,7 +1,7 @@
 """
     A valid parentheses string is either empty (""), "(" + A + ")", or A + B,
     where A and B are valid parentheses strings, and + represents string concatenation. 
-     For example, "", "()", "(())()", and "(()(()))" are all valid parentheses strings.
+    For example, "", "()", "(())()", and "(()(()))" are all valid parentheses strings.
 
     A valid parentheses string S is primitive if it is nonempty,
     and there does not exist a way to split it into S = A+B, with A and B nonempty valid parentheses strings.
