@@ -47,8 +47,9 @@ def oddCells2(n, m, indices):
         row_num[i[1]] += 1
     for j in line_num:
         for k in row_num:
-            if (j % 2 == 1 and k %2 != 1) or (j%2 !=1 and k %2 == 1):
-               result +=1
+            # if (j % 2 == 1 and k %2 != 1) or (j%2 !=1 and k %2 == 1):
+            #    result +=1
+            result += ((j % 2 == 1 and k %2 != 1) or (j%2 !=1 and k %2 == 1))
     return result
 
 
