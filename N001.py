@@ -12,31 +12,32 @@ return [0, 1].
 """
 
 
-def twosum1(nums,target):
+def twosum1(nums, target):
     for index, value in enumerate(nums):
         value2 = target - value
         if value2 in nums:
             if index != nums.index(value2):
                 return [index, nums.index(value2)]
 
-def twosum2(nums,target):
+
+def twosum2(nums, target):
     for index, value in enumerate(nums):
         try:
-            index2=nums.index(target-value,index+1,len(nums))
+            index2 = nums.index(target - value, index + 1, len(nums))
             return [index, index2]
         except ValueError:
             continue
 
 
-def twosum3(nums,target):
+def twosum3(nums, target):
     nums_dic = {}
     for index, value in enumerate(nums):
         if nums_dic.get(value, -1) == -1:
-            nums_dic[target-value] = index
+            nums_dic[target - value] = index
         else:
             return [nums_dic[value], index]
 
 
-nums =[3,4,5,2]
+nums = [3, 4, 5, 2]
 target = 6
-print(twosum3(nums,target))
+print(twosum3(nums, target))
