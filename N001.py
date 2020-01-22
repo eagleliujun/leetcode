@@ -37,7 +37,11 @@ def twosum3(nums, target):
         else:
             return [nums_dic[value], index]
 
+from collections import deque
+def twosum4(nums, target):
+    deque(target)
+
 
 nums = [3, 4, 5, 2]
 target = 6
-print(twosum3(nums, target))
+print(twosum4(nums, target))
