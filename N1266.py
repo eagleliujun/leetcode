@@ -42,6 +42,6 @@ def minTimeToVisitAllPoints(points):
         start = point
     return step
 
-points = [[1,1],[3,4],[-1,0]]
-print(minTimeToVisitAllPoints(points))
 
+points = [[1, 1], [3, 4], [-1, 0]]
+print(minTimeToVisitAllPoints(points))

@@ -186,31 +186,41 @@ def numRookCapturer4(board):
     lens_b = len(board[0])
     lens_a = len(board)
     for index1, value1 in enumerate(board):
-        try:
+        # try:
+        #     mark2 = value1.index('R')
+        #     mark1 = index1
+        #     break
+        # except ValueError:
+        #     continue
+
+        if 'R' in value1:
             mark2 = value1.index('R')
             mark1 = index1
             break
-        except ValueError:
+        else:
             continue
-    for i in range(mark1 - 1, -1, -1):       # up
+
+
+
+    for i in range(mark1 - 1, -1, -1):  # up
         if board[i][mark2] == 'B':
             break
         elif board[i][mark2] == 'p':
             result += 1
             break
-    for i in range(mark1 + 1, lens_b, 1):    # down
+    for i in range(mark1 + 1, lens_b, 1):  # down
         if board[i][mark2] == 'B':
             break
         elif board[i][mark2] == 'p':
             result += 1
             break
-    for i in range(mark2 - 1, -1, -1):       # left
+    for i in range(mark2 - 1, -1, -1):  # left
         if board[mark1][i] == 'B':
             break
         elif board[mark1][i] == 'p':
             result += 1
             break
-    for i in range(mark2 + 1, lens_a, 1):    # right
+    for i in range(mark2 + 1, lens_a, 1):  # right
         if board[mark1][i] == 'B':
             break
         elif board[mark1][i] == 'p':
@@ -219,7 +229,79 @@ def numRookCapturer4(board):
     return result
 
 
+# def numRookCapturer5(board): # dict version can not work, more complexity ,give up
+#     lens_b = len(board[0])
+#     lens_a = len(board)
+#     result = 0
+#     mark3 = 0
+#     mark = {i: -1 for i in range(lens_b)}
+#     mark1, mark2 = 0, 0
+#     for index1, value1 in enumerate(board):
+#         for index2, value2 in enumerate(value1):
+#             if value2 == 'p':
+#                 mark[index2] = 1
+#             elif value2 == 'B':
+#                 mark[index2] = 0
+#             elif value2 == 'R':
+#                 result = 0 if mark[index2] == -1 else mark[index2]  # up
+#                 mark1, mark2, mark3 = index1, index2, 1
+#             else:
+#                 mark[index2] =
+#         if mark3 == 1:
+#             break
+#     # print(mark1,mark2,mark)
+#     for i in range(mark1 + 1, lens_a, 1):  # down
+#         if board[i][mark2] == 'B':
+#             break
+#         elif board[i][mark2] == 'p':
+#             result += 1
+#             break
+#     for i in range(mark2 - 1, -1, -1):  # left
+#         if mark[i] == 0:
+#             break
+#         elif mark[i] == 1:
+#             result += 1
+#             break
+#     for i in range(mark2 + 1, lens_b, 1):  # right
+#         if mark[i] == 0:
+#             break
+#         elif mark[i] == 1:
+#             result += 1
+#             break
+#     return result
 
+
+class Solution:
+    def helper(self, board, x, y, di):       # ref from solution
+        if (x < 0 or y < 0 or x >= 8 or y >= 8):
+            return 0
+        if (board[x][y] == '.' or board[x][y] == "R"):
+            if (di == 0):
+                return self.helper(board, x + 1, y, di)
+            elif (di == 1):
+                return self.helper(board, x - 1, y, di)
+            elif (di == 2):
+                return self.helper(board, x, y + 1, di)
+            else:
+                return self.helper(board, x, y - 1, di)
+        elif (board[x][y] == "B"):
+            return 0
+        elif (board[x][y] == "p"):
+            return 1
+
+    def numRookCaptures(self, board) -> int:
+        for i in range(8):
+            for j in range(8):
+                if (board[i][j] == "R"):
+                    break
+            if (board[i][j] == "R"):
+                break
+        su = 0
+        su += self.helper(board, i, j, 0)
+        su += self.helper(board, i, j, 1)
+        su += self.helper(board, i, j, 2)
+        su += self.helper(board, i, j, 3)
+        return su
 
 board = [[".", ".", ".", ".", ".", ".", ".", "."],
          [".", ".", ".", "p", ".", ".", ".", "."],
@@ -255,8 +337,16 @@ board4 = [[".", ".", ".", ".", ".", ".", ".", "."],
           [".", ".", ".", "p", ".", ".", ".", "."],
           [".", ".", ".", ".", ".", ".", ".", "."],
           [".", ".", ".", ".", ".", ".", ".", "."]]
+board5 = [[".", ".", ".", ".", ".", ".", ".", "."],
+          [".", ".", "p", "p", ".", "p", "p", "."],
+          [".", "p", ".", ".", ".", ".", ".", "p"],
+          [".", ".", ".", ".", "R", ".", ".", "."],
+          [".", "p", ".", ".", ".", ".", ".", "p"],
+          [".", ".", "p", "p", ".", "p", "p", "."],
+          [".", ".", ".", ".", ".", ".", ".", "."],
+          [".", ".", ".", ".", ".", ".", ".", "."]]
 
-print(numRookCaptures1(board3))
-print(numRookCaptures2(board3))
-print(numRookCapturer3(board3))
-print(numRookCapturer4(board3))
+print(numRookCaptures1(board2))
+print(numRookCaptures2(board2))
+print(numRookCapturer3(board4))
+print(numRookCapturer4(board4))

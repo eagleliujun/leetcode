@@ -23,14 +23,15 @@ Constraints:
 0 <= indices[i][1] < m
 """
 
+
 def oddCells1(n, m, indices):
     matrix_initial = [[0 for _ in range(m)] for _ in range(n)]
     result = 0
     for i in indices:
-        matrix_initial[i[0]] = [matrix_initial[i[0]][k]+1 for k in range(m)]
+        matrix_initial[i[0]] = [matrix_initial[i[0]][k] + 1 for k in range(m)]
         #  line +1
         for v in range(n):
-            matrix_initial[v][i[1]] += 1   # row+1
+            matrix_initial[v][i[1]] += 1  # row+1
     for i in matrix_initial:  # calculate the odd
         for j in i:
             if j % 2 == 1:
@@ -49,12 +50,12 @@ def oddCells2(n, m, indices):
         for k in row_num:
             # if (j % 2 == 1 and k %2 != 1) or (j%2 !=1 and k %2 == 1):
             #    result +=1
-            result += ((j % 2 == 1 and k %2 != 1) or (j%2 !=1 and k %2 == 1))
+            result += ((j % 2 == 1 and k % 2 != 1) or (j % 2 != 1 and k % 2 == 1))
     return result
 
 
 n = 2
 m = 3
-indices = [[0,1],[1,1]]
-print(oddCells1(n,m,indices))
-print(oddCells2(n,m,indices))
+indices = [[0, 1], [1, 1]]
+print(oddCells1(n, m, indices))
+print(oddCells2(n, m, indices))
