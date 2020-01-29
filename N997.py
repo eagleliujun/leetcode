@@ -68,7 +68,7 @@ def findJudge2(N, trust):
     return pre[0]
 
 
-def findJudge3(N, trust):
+def findJudge3(N, trust):  # not finished
     # indim = [ 0 for _ in range(len(trust))]
     outdim = [ N for _ in range(N)]
     for i in trust:
