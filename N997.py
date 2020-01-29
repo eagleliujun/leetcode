@@ -68,9 +68,25 @@ def findJudge2(N, trust):
     return pre[0]
 
 
+def findJudge3(N, trust):
+    # indim = [ 0 for _ in range(len(trust))]
+    outdim = [ N for _ in range(N)]
+    for i in trust:
+    #     indim[i[0]] += 1
+        outdim[i[1]] -= 1
+    for i in range(1, N+1):
+        if outdim[i] == 1:
+            pre = i
+    for i in range(1, N):
+        if [i, pre] not in trust and i != pre:
+            return -1
+    return pre
 
-n = 4
+
+
+n = 3
 trust = [[1, 3], [1, 4], [2, 3], [2, 4], [4, 3]]
+trust2=[[1,3],[2,3]]
 
 print(findJudge1(n, trust))
-print(findJudge2(n, trust))
+print(findJudge3(2, trust2))
