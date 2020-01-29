@@ -25,6 +25,7 @@ Output: 3
 Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
 """
 
+
 def fib1(N):
     if N == 0:
         return 0
@@ -35,9 +36,7 @@ def fib1(N):
 
 
 def fib2(N):
-    i = 0
-    j = 1
-    k = 2
+    i, j, k= 0, 1, 2
     if N == 0:
         return 0
     while k <= N:

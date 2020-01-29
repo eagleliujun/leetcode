@@ -48,20 +48,41 @@ def removeDuplicates1(nums):
 
 
 def removeDuplicates2(nums):
-    i = 0
-    lens = len(nums)
-    for i in range(lens):
-        nums.append(nums[0])
-        del nums[0]
-        if nums[0] == nums[-1]:
-            nums.pop()
-    return len(nums)
+    i, j = 0, 1
+    k = len(nums)
+    if k == 0:
+        return 0
+    while j < k:
+        if nums[i] == nums[j]:
+            j += 1
+        elif i + 1 == j:
+            i += 1
+            j += 1
+        else:
+            nums[i + 1] = nums[j]
+            j += 1
+            i += 1
+    del nums[i: k - 1]
+    return i + 1
 
-
+def removeDuplicates3(nums):
+    i, j = 0, 1
+    if len(nums) == 0:
+        return 0
+    while j < len(nums):
+        if nums[i] == nums[j]:
+            j += 1
+        else:
+            nums[i + 1] = nums[j]
+            i += 1
+            j += 1
+    # del nums[i: len(nums) - 1]
+    return i + 1
 
 
 
 
 nums = [1,2,3,3,4,5,5,5,6,6,7]
-#print(removeDuplicates1(nums))
-print(removeDuplicates2(nums))
+nums2 = [1,1,1,2,3,3,4,5,5,5,6,6,7]
+print(removeDuplicates1(nums))
+print(removeDuplicates3(nums2),nums2)
