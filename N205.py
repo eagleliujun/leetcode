@@ -66,6 +66,42 @@ def isIsomorphic32(s,t):
     k2 = [*map(t.index, t)]
     return k1==k2
 
+def isIsomorphic4(s, t):
+    d = {}
+    for i, j in zip(s, t):
+        if i in d:
+            if d[i] != j:
+                return False
+        elif j not in d.values():
+            d[i] = j
+        else:
+            return False
+    return True
+
+def isIsomorphic5(s, t):
+    d = {}
+    for i, j in zip(s, t):
+        if i not in d:
+            if j not in d.values():
+                d[i] = j
+            else:
+                return False
+        elif d[i] != j:
+            return False
+    return True
+
+def isIsomorphic6(s, t):
+    d = {}
+    for i in range(len(s)):
+        if s[i] not in d:
+            if t[i] not in d.values():
+                d[s[i]] = t[i]
+            else:
+                return False
+        elif d[s[i]] != t[i]:
+            return False
+    return True
+
 s1 = "aba"
 t1 = "baa"  #false
 s= 'ab'
@@ -74,4 +110,4 @@ s2 = 'aba'
 t2 = 'foo'   #false
 s3 = 'ab'
 s4 = 'aa'    #false
-print(isIsomorphic32(s2, t2))
+print(isIsomorphic6(s2, t2))
