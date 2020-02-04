@@ -58,24 +58,20 @@ def isIsomorphic2(s,t):
             return False
     return True
 
-def isIsomorphic4(s,t):
-    comp1 = {}
-    for i, value1 in enumerate(s):
-        if comp1.setdefault(value1, t[i]) != t[i]:
-            return False
-    comp1.clear()
-    for j, value2 in enumerate(t):
-        if comp1.setdefault(value2, s[j]) != s[j]:
-            return False
-    return True
+def isIsomorphic3(s,t):   # ref to the solution
+    return [*map(s.index, s)] == [*map(t.index, t)]
 
+def isIsomorphic32(s,t):
+    k1 = list(map(s.index, s))
+    k2 = [*map(t.index, t)]
+    return k1==k2
 
 s1 = "aba"
 t1 = "baa"  #false
 s= 'ab'
 t= 'ca'     # true
-s2 = 'bar'
+s2 = 'aba'
 t2 = 'foo'   #false
 s3 = 'ab'
 s4 = 'aa'    #false
-print(isIsomorphic2(s2, t2))
+print(isIsomorphic32(s2, t2))
