@@ -57,7 +57,6 @@ def isHappy2(n):
         a_lens_old += 1
 
 
-
 def isHappy3(n):
     n_set = {n}
     def defhappy(n,set_len):
