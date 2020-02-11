@@ -59,17 +59,17 @@ def isHappy2(n):
 
 def isHappy3(n):
     n_set = {n}
-    def defhappy(n,set_len):
-        if n == 1:
+    def defhappy(n1,set_len):
+        if n1 == 1:
             return True
         else:
-            a, b = divmod(n, 10)
-            n = b * b
+            a, b = divmod(n1, 10)
+            n1 = b * b
             while a != 0:
                 a, b = divmod(a, 10)
-                n += b * b
-            n_set.add(n)
-            return defhappy(n, set_len+1) if set_len != len(n_set) else False
+                n1 += b * b
+            n_set.add(n1)
+            return defhappy(n1, set_len+1) if set_len != len(n_set) else False
     return defhappy(n, 1)
 
 
