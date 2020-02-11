@@ -34,8 +34,6 @@ def missingNumber4(nums):
     return sum_l
 
 
-
-
 l1 = [9,6,4,2,3,5,7,0,1]
 l2 = [0]
 print(missingNumber4(l1))
