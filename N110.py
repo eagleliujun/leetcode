@@ -102,21 +102,50 @@ class Solution:
             return True
         return False
 
-    def isBalanced1(self, root: TreeNode) -> bool:
+    # def isBalanced1(self, root: TreeNode) -> bool:
+    #     judge = False
+    #     def judge_node(node):
+    #         def high(root1: TreeNode):
+    #             if root1.left and root1.right:
+    #                 return 1 + max(high(root1.left), high(root1.right))
+    #             elif root1.left:
+    #                 return 1 + high(root1.left)
+    #             elif root1.right:
+    #                 return 1 + high(root1.right)
+    #             else:
+    #                 return 1
+    #         if root == None:
+    #             return True
+    #         l_high = high(root.left) if root.left else 0
+    #         r_high = high(root.right) if root.right else 0
+    #         if abs(l_high - r_high) <= 1:
+    #             return True
+    #         return False
+    #
+    #     def judge(top1):
 
-        def high(root1:TreeNode):
-            print(root1.val)
-            if not root1.val:
-                return 0
+
+
+
+        judge(root)
+
+    def minDepth(self, root: TreeNode) -> int:
+        def high(root1: TreeNode):
+            if root1.left and root1.right:
+                return 1 + min(high(root1.left), high(root1.right))
+            elif root1.left:
+                return 1 + high(root1.left)
+            elif root1.right:
+                return 1 + high(root1.right)
             else:
-                return 1 + max(high(root1.left), high(root1.right))
-
-        l_high = high(root.left)
-        r_high = high(root.right)
-        if abs(l_high - r_high) <= 1:
-            return True
-        return False
-
+                return 1
+        if root == None:
+            return 0
+        l_high = 1+high(root.left) if root.left else 1
+        r_high = 1+high(root.right) if root.right else 1
+        if l_high  > r_high:
+            return r_high
+        return l_high
 
 def lst2tree(l):
     """Convert list into Tree (BFS)"""
@@ -165,10 +194,10 @@ def lst2tree(l):
 
 if __name__ == "__main__":
     input_1 = [3, 9, 20, None, None, 15, 7]
-    input_2 = []
+    input_2 = [1,2]
     input_3 = [1,2,2,3,None,None,3,4,None,None,4]
-    input_tree_1 = lst2tree(input_3)
+    input_tree_1 = lst2tree(input_2)
     sol = Solution()
-    print(sol.isBalanced(input_tree_1))
+    print(sol.minDepth(input_tree_1))
 
 # ######################
