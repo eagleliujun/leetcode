@@ -22,6 +22,8 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 
 def maxProfit(prices):
+    if prices == []:
+        return 0
     lens = len(prices)
     profit = [[0 for _ in range(2)] for _ in range(lens)]
     # profit[lens][1 or 0]: lens:days  1 : hold stock  0: hold money
@@ -35,6 +37,8 @@ def maxProfit(prices):
     return profit[lens - 1][0]
 
 def maxProfit2(prices):
+    if prices == []:
+        return 0
     lens = len(prices)
     profit0, profit1 = 0, -prices[0]
     for i in range(1,lens):
@@ -44,6 +48,8 @@ def maxProfit2(prices):
 
 
 def maxProfit3(prices):
+    if prices == []:
+        return 0
     lens = len(prices)
     profit0, profit1 = 0, -prices[0]
     for i in range(1,lens):
