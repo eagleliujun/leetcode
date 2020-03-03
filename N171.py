@@ -48,6 +48,5 @@ def titleToNumber2(s):
     return res
 
 
-
 s = 'BA'
 print(titleToNumber1(s))
