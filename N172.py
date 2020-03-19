@@ -23,8 +23,7 @@ def trailingZeroes1(n):
 
 def trailingZeroes2(n):
     if n==0:
-        return 0
-    return n//5 + trailingZeroes2(n//5)
+        return n//5 + trailingZeroes2(n//5)
 
 
 print(trailingZeroes2(30))
