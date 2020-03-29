@@ -1,4 +1,5 @@
 class Solution:
+
     def longestPalindrome1(self, s: str) -> int:
         d = {}
         for i in s:

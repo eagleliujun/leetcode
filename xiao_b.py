@@ -2,6 +2,7 @@
 """
 This file read all data points and combine the data into minutes,
 and store the data into pandas object for LSTM - RNN to model and make a prediction
+
 @author: Kai
 """
 from datetime import datetime, timedelta
@@ -11,7 +12,9 @@ import numpy as np
 
 import sys
 import subprocess
-
+"""
+subprocess模块允许你启动一个新的进程,连接输入/输出/错误的管道, 获得子进程的返回码。这个模块目标是代替一些老的模块,
+"""
 from influxdb import DataFrameClient
 
 
@@ -439,10 +442,13 @@ str_to_day = '2019-07-15'
 # str_to_day = '2018-01-31'
 
 read_data_proc = StockDataToFromfluxDB()
+# 实例化类
 
 raw_daily_data = read_data_proc.read_daily_data_by_stock_id_and_date_range(str_stock_id, str_from_day, str_to_day)
+# 读数据
 
 final_order_data = read_data_proc.store_stock_trans_data_in_dict(str_stock_id, raw_daily_data)
+
 
 # final_combined_data = read_data_proc.create_dataset(final_order_data, 5, 5)
 
@@ -463,8 +469,24 @@ index_data = read_data_proc.read_daily_index_data_by_id_and_date_range(str_index
 
 
 import tensorflow as tf
+"""
+TensorFlow™ 是一个采用数据流图（data flow graphs），用于数值计算的开源软件库。
+节点（Nodes）在图中表示数学操作，图中的线（edges）则表示在节点间相互联系的多维数据数组，即张量（tensor）。
+它灵活的架构让你可以在多种平台上展开计算，例如台式计算机中的一个或多个CPU（或GPU），服务器，移动设备等等。
+TensorFlow 最初由Google大脑小组（隶属于Google机器智能研究机构）的研究员和工程师们开发出来，
+用于机器学习和深度神经网络方面的研究，但这个系统的通用性使其也可广泛用于其他计算领域。
+http://www.tensorfly.cn/
+"""
 import keras.backend.tensorflow_backend as KTF
+""" Keras是一个由Python编写的开源人工神经网络库，
+可以作为Tensorflow、Microsoft-CNTK和Theano的高阶应用程序接口，
+进行深度学习模型的设计、调试、评估、应用和可视化
+"""
 from radam import RAdam
+"""
+Ranger 优化器将 RAdam 与 Lookahead 这两大新兴成果加以结合，共同构建起一套用于深度学习的优化器。
+为了证明其功效，我们团队最近利用 Ranger 优化器捕捉了 FastAI 全球排行榜上的 8 项上榜记录
+"""
 
 gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.8)
 sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
@@ -592,7 +614,11 @@ X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], feature_number))
 
 # X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 5))
 
-
+"""
+Keras是一个由Python编写的开源人工神经网络库，
+可以作为Tensorflow、Microsoft-CNTK和Theano的高阶应用程序接口，
+进行深度学习模型的设计、调试、评估、应用和可视化。
+"""
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import CuDNNLSTM

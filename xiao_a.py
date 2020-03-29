@@ -2,25 +2,62 @@
 """
 Created on Wed Apr 10 22:28:35 2019
 This file read and parse the CSV stock high frequency data, then store all data points into InfluxDB
+
 @author: Kai
+读股票交易数据，产生csv文件，然后写入influxdb数据库，这个数据库的好处是time-series的，非常快，但是基本不能修改，
+写入influxdb以后，要对某个时间段读取数据再读取一次，然后写入dataframe,然后再送入深度学习和做建模和预测。
+
 """
 
 # import numpy as np
 import pandas as pd
+"""
+pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。
+Pandas 纳入了大量库和一些标准的数据模型，提供了高效地操作大型数据集所需的工具。
+pandas提供了大量能使我们快速便捷地处理数据的函数和方法。
+它是使Python成为强大而高效的数据分析环境的重要因素之一。
+"""
 import os
 # from influxdb import client as influxdb
 from influxdb import DataFrameClient
+"""
+influxDB(时序数据库),常用的一种使用场景:监控数据统计
+DataFrame是一个以命名列方式组织的分布式数据集。
+在概念上,它跟关系型数据库中的一张表或者1个Python(或者R)中的data frame一样,但是比他们更优化。
+DataFrame可以根据结构化的数据文件、hive表、外部数据库或者已经存在的RDD构造。
+
+"""
 
 from dateutil.relativedelta import relativedelta
+
+"""
+dateutil : 时间模块
+
+# 获取当前时间的前一个月
+datetime.datetime.now() - relativedelta(months=+1)
+# 获取当天的前一个月
+datetime.date.today() - relativedelta(months=+1) 
+
+"""
 
 from datetime import datetime, timedelta
 
 import tushare as ts
-
+"""
+http://tushare.org/
+Tushare是一个免费、开源的python财经数据接口包。
+主要实现对股票等金融数据从数据采集、清洗加工 到 数据存储的过程，
+能够为金融分析人员提供快速、整洁、和多样的便于分析的数据，为他们在数据获取方面极大地减轻工作量，
+使他们更加专注于策略和模型的研究与实现上。考虑到Python pandas包在金融量化分析中体现出的优势，
+Tushare返回的绝大部分的数据格式都是pandas DataFrame类型，
+"""
 import math
 
+"""
+df_stk_data：  pandas 读出的CSV格式的股票数据
+"""
 
-class StockDataToInfluxDB:
+class StockDataToInfluxDB:  # from Stock data to  Influx database
 
     def __init__(self, s_host="127.0.0.1", i_port=8086, s_username='', s_password='',
                  s_rootdir='E:\\Level-2_All_China_A_Stocks', s_trans_db='stocktrans', s_stock_daily_db='stockdaily'):
@@ -29,9 +66,9 @@ class StockDataToInfluxDB:
         self.username = s_username
         self.password = s_password
         self.rootdir = s_rootdir
-        self.stock_trans_db = s_trans_db
-        self.stock_daily_db = s_stock_daily_db
-
+        self.stock_trans_db = s_trans_db          # tran data
+        self.stock_daily_db = s_stock_daily_db    # stock day data
+        # 采集的数据结构
         self.stock_trans_db_client = DataFrameClient(host=self.host, port=self.port,
                                                      username=self.username, password=self.password,
                                                      database=self.stock_trans_db)
@@ -39,13 +76,14 @@ class StockDataToInfluxDB:
         self.stock_daily_db_client = DataFrameClient(host=self.host, port=self.port,
                                                      username=self.username, password=self.password,
                                                      database=self.stock_daily_db)
-
+        # 调用的数据接口
         ts.set_token('8d28258b02cf3d02feb667de09c0c584ef549fd60a53c5a08c1477fd')
         self.prodata = ts.pro_api()
 
     def convert_eng_ver1_dataframe(self, df_stk_data):
 
         # formatting input csv file (current version 1) of English version
+        # 英语数据框架 同汉语数据框架
 
         # global df_stock_data
 
@@ -76,6 +114,7 @@ class StockDataToInfluxDB:
     def convert_chn_ver1_dataframe(self, df_stk_data):
 
         # formatting input csv file (current version 1) of Chinese version
+        # 汉语数据框架  同英语数据框架
 
         df_stk_data.drop(['卖单成交状态', '卖委托价格', '买单成交状态', '买委托价格'], axis=1, inplace=True)
 
@@ -115,7 +154,7 @@ class StockDataToInfluxDB:
         df_stk_data['nindex'] = df_stk_data.index
 
         df_stk_data['rank'] = 0
-        df_stk_data['rank'] = df_stk_data.groupby('time')['nindex'].rank('dense', ascending=True)
+        df_stk_data['rank'] = df_stk_data.groupby('time')['nindex'].rank('dense', ascending=True)  # 对数据进行分组
         df_stk_data['rank'] = df_stk_data['rank'].map(int).apply(lambda x: '{0:0>5}'.format(x))
 
         str_day = str_day_dir
@@ -295,7 +334,7 @@ class StockDataToInfluxDB:
         lst_months = []
 
         lst_months.append(str(from_datetime_obj.year).zfill(4) + str(from_datetime_obj.month).zfill(2))
-
+        # 表头
         while (from_datetime_obj.year != to_datetime_obj.year) or (from_datetime_obj.month != to_datetime_obj.month):
             from_datetime_obj = from_datetime_obj + relativedelta(months=+1)
             lst_months.append(str(from_datetime_obj.year).zfill(4) + str(from_datetime_obj.month).zfill(2))
@@ -540,8 +579,10 @@ from_date = '2018-01-02'
 to_date = '2019-08-06'
 
 write_to_influx_proc = StockDataToInfluxDB()
+# 类实例化
 
 write_to_influx_proc.write_stock_data_by_id_and_date_range_to_influxdb(from_date, to_date, stocks)
+# 把时间范围内的股票数据写入 influxdb 格式中
 
 write_to_influx_proc.write_stock_daily_data_by_id_and_date_range_to_influxdb(from_date, to_date, stocks)
 
