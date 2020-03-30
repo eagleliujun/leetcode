@@ -27,7 +27,7 @@ class Solution:
         return n%4 != 0
 
     def canWinNim3(self, n: int):
-        if n < 4:
+        if n < 3 :
             return True
         elif n == 4:
             return False
@@ -35,7 +35,7 @@ class Solution:
             return self.canWinNim3(n-4)
 
 
-n = 209
+n = 215
 
 test = Solution()
 
