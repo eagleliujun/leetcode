@@ -35,7 +35,7 @@ class Solution:
             return self.canWinNim3(n-4)
 
 
-n = 215
+n = 200
 
 test = Solution()
 
