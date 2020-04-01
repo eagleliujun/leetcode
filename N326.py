@@ -44,7 +44,7 @@ class Solution:
         return False
 
     # def isPowerOfThree4(self, n: int) -> bool:
-    #     return False if n == 0 else pow(3, math.log(n, 3)) == n
+    #     return False if n == 0 else math.log(n, 3) == int(math.log(n, 3))
 
 
     # def isPowerOfThree3(self, n: int) -> bool:  #
