@@ -73,15 +73,15 @@ class Solution:
         return s_result
 
     def reverseVowels4(self, s: str) -> str:
-        vowel = '[aieouAIEOU]'
-        com = re.compile(vowel)
-        t = com.findall(s)
-        t.reverse()
-        k = re.sub(vowel, '9', s)
+        vowel = '[aieouAIEOU]'   # 任意一个符合就Ok
+        com = re.compile(vowel)    #创建规则
+        t = com.findall(s)        # 找到所有符合规则的字符
+        t.reverse()               # 反转找到的结果
+        k = re.sub(vowel, '9', s)  # 替代原始字符串中的元音字符
         # t2=com.finditer(s)
         for i in t:
-            k = re.sub('9', i, k, 1)
-            print(k)
+            k = re.sub('9', i, k, 1)  #利用反转的结果，每次替代一个原始字符串中已经被替换的字符
+            print(k)                  # 存在问题： '9'这个字符，被错误替换了
         return k
 
 s = "leetcodeaae"
