@@ -81,14 +81,31 @@ class Solution:
         # t2=com.finditer(s)
         for i in t:
             k = re.sub('9', i, k, 1)  #利用反转的结果，每次替代一个原始字符串中已经被替换的字符
-            print(k)                  # 存在问题： '9'这个字符，被错误替换了
+            #print(k)                  # 存在问题： '9'这个字符，被错误替换了
         return k
+
+    def reverseVowels5(self, s: str) -> str:
+        vowels = {'a', 'i', 'e', 'o', 'u','A', 'I', 'E', 'O', 'U'}
+        s_list = list(s)
+        i, j = 0, len(s)-1
+        while i < j:
+            if s_list[i] in vowels and s_list[j] in vowels:
+                s_list[i], s_list[j] = s_list[j], s_list[i]
+                i += 1
+                j -= 1
+            elif s_list[i] not in vowels:
+                i += 1
+            elif s_list[j] not in vowels:
+                j -= 1
+        return ''.join(s_list)
 
 s = "leetcodeaae"
 s2 = "A mEn, I plOn, U canel: Pinomu"
 test = Solution()
-print(test.reverseVowels1(s))
-print(test.reverseVowels2(s))
-print(test.reverseVowels3(s))
-print(test.reverseVowels4(s2))
-print(s2)
+#print(test.reverseVowels1(s))
+#print(test.reverseVowels2(s))
+#print(test.reverseVowels3(s))
+#print(test.reverseVowels4(s2))
+#print(s2)
+
+print(test.reverseVowels5(s))
