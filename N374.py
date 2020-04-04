@@ -50,11 +50,11 @@ class Solution:
     def guessNumber3(self, n: int) -> int:
         start = 0
         end = n
-        while start <= end:                     #  =
+        while start <= end:                     #   =
             gus = start+(end - start)//2
             if guess(gus) == -1:
-                end = gus-1                     # -1
+                end = gus-1                     #  -1
             elif guess(gus) == 1:
-                start = gus+1                   # +1
+                start = gus+1                   #  +1
             else:
                 return gus
