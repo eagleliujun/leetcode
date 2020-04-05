@@ -41,10 +41,23 @@ class Solution:
             else:
                 mag_dic[j] -= 1
         return True
+    def canConstruct4(self, ransomNote: str, magazine: str) -> bool:  # str
+        for each in ransomNote:
+            if each not in magazine:
+                return False
+            elif ransomNote.count(each) > magazine.count(each):
+                return False
+        return True
 
+    def canConstruct5(self, ransomNote: str, magazine: str) -> bool:
+        ransomNoteSet = set(ransomNote)
+        for char in ransomNoteSet:
+            if ransomNote.count(char) > magazine.count(char):
+                return False
+        return True
 
 
 r = 'aa'
 m = 'aab'
 test = Solution()
-print(test.canConstruct3(r,m))
+print(test.canConstruct5(r,m))
