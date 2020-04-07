@@ -62,6 +62,14 @@ class Solution:
                 return k
 
 
+    def findTheDifference6(self, s: str, t: str) -> str:  # str
+        for i in s:
+            t = t.replace(i, '', 1)
+        return t
+
+    def findTheDifference7(self, s: str, t: str) -> str:  # ascii
+        return chr(sum(map(ord,t))-sum(map(ord,s)))
+
 s1 = "abcd"
 t2 = "abcde"
 s = 'ae'
@@ -73,3 +81,5 @@ test = Solution()
 print(test.findTheDifference3(s, t))
 print(test.findTheDifference4(s, t))
 print(test.findTheDifference5(s, t))
+print(test.findTheDifference6(s, t))
+print(test.findTheDifference7(s, t))
