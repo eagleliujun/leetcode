@@ -26,7 +26,7 @@ If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B,
 
 """
 
-import re
+
 
 class Solution:
     def isSubsequence1(self, s: str, t: str) -> bool:
