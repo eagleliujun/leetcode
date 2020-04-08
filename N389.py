@@ -70,6 +70,15 @@ class Solution:
     def findTheDifference7(self, s: str, t: str) -> str:  # ascii
         return chr(sum(map(ord,t))-sum(map(ord,s)))
 
+    def findTheDifference8(self, s: str, t: str) -> str:  # asc-xor
+        ans = 0
+        for i in s:
+            ans ^= ord(i)
+        for i in t:
+            ans ^= ord(i)
+        return chr(ans)
+
+
 s1 = "abcd"
 t2 = "abcde"
 s = 'ae'
@@ -83,3 +92,4 @@ print(test.findTheDifference4(s, t))
 print(test.findTheDifference5(s, t))
 print(test.findTheDifference6(s, t))
 print(test.findTheDifference7(s, t))
+print(test.findTheDifference8(s, t))
