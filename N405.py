@@ -87,11 +87,12 @@ class Solution:
         mp = {10: 'a', 11: 'b', 12: 'c', 13: 'd', 14: 'e', 15: 'f', 16: '10'}
         while num > 0:
             bit = num % 16
-            if bit in mp:
-                bit = mp[bit]
-            else:
-                bit = str(bit)
-            s = bit +s
+            bit_str = str(bit) if bit not in mp else mp[bit]
+            # if bit in mp:
+            #     bit = mp[bit]
+            # else:
+            #     bit = str(bit)
+            s = bit_str +s
             num = num // 16
         return s
 
