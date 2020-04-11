@@ -61,9 +61,45 @@ class Solution:
         result.reverse()
         return ''.join(result)
 
+    def toHex3(self, num: int) -> str:
+        if num < 0:
+            num = 2 ** 32 + num
+        s = ''
+
+        mp = {0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9', 10: 'a', 11: 'b', 12: 'c',
+              13: 'd', 14: 'e', 15: 'f', 16: '10'}
+
+        while num > 16:
+            bit = num % 16
+            s = mp[bit] + s
+            num = num // 16
+
+        s = mp[num] + s
+        return s
+
+    def toHex4(self, num: int) -> str:
+        max_int = 0xffffffff + 0x00000001
+        if num == 0:
+            return '0'
+        if num < 0:
+            num += max_int
+        s = ''
+        mp = {10: 'a', 11: 'b', 12: 'c', 13: 'd', 14: 'e', 15: 'f', 16: '10'}
+        while num > 0:
+            bit = num % 16
+            if bit in mp:
+                bit = mp[bit]
+            else:
+                bit = str(bit)
+            s = bit +s
+            num = num // 16
+        return s
+
 
 
 test = Solution()
 num = -151
 print(test.toHex1(num))
 print(test.toHex2(num))
+print(test.toHex3(num))
+print(test.toHex4(num))
