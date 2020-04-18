@@ -35,7 +35,7 @@ class Solution:
         count =0
         # s1=[]
         # print(count+1 for i in s_list if i != '')
-        sum((1 for i in s_list if i!= '' ))
+        sum(count +=1 for i in s_list if i!= '')
 
         return count
 
