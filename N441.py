@@ -33,14 +33,15 @@ import math
 class Solution:
     def arrangeCoins1(self, n: int) -> int:
         start, end = int(math.sqrt(n)),n
+        mid = start + (end - start) // 2
         while start <= end:
-            mid = start + (end - start) // 2
             if mid*(mid+1) //2 > n:
                 end = mid -1
             elif mid*(mid+1) //2 < n:
                 start = mid +1
             else:
                 return mid
+            mid = start + (end - start) // 2
         return mid
 
     def arrangeCoins2(self, n: int) -> int:
@@ -60,17 +61,18 @@ class Solution:
 
     def arrangeCoins3(self, n: int) -> int:
         start, end = int(math.sqrt(n)), int(math.sqrt(2*n))
+        mid = start + (end - start) // 2
         while start <= end:
-            mid = start + (end - start) // 2
             if mid*(mid+1) //2 > n:
                 end = mid -1
             elif mid*(mid+1) //2 < n:
                 start = mid +1
             else:
                 return mid
+            mid = start + (end - start) // 2
         return mid
 
-n =8
+n =800
 test = Solution()
 print(test.arrangeCoins1(n))
 print(test.arrangeCoins2(n))
