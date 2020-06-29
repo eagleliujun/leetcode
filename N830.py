@@ -44,7 +44,6 @@ class Solution:
             result.append([start, end])
         return result
 
-
 S1="abbxxxxzzy"
 S2 = 'aaa'
 S3="abcdddeeeeaabbbcd"
