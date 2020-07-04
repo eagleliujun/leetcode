@@ -47,7 +47,6 @@ class Solution:
                 if last_length < seat:
                     last_length = seat
                 seat = 0
-
         if right ==0:
             last_length = max(last_length, seat *2)
         return (last_length+1) // 2
