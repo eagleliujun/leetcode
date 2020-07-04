@@ -51,11 +51,29 @@ class Solution:
             last_length = max(last_length, seat *2)
         return (last_length+1) // 2
 
+    def maxDistToClosest2(self, seats):
+        left0 = seats[0]
+        left = right = res = 0
+        for right in range(len(seats)):
+            if seats[right] == 1:
+                if left0 == 0:
+                    res = (right - left) *2
+                    left0 = 1
+                elif (right-left-1) > res:
+                    res = right-left-1
+                left = right
+        if seats[-1] == 0:
+            res = max(res, (right - left) * 2)
+        return (res+1)//2
+
 a1 = [1,0,0,0,1,0,1]
-a2 = [1,0,0,0]
+a2 = [1,0,0,1]
 a3 = [0,0,1,0,1,1]
 a4=[0,0,0,0,0,0,1,0,0,0,0]
 test =Solution()
 print(test.maxDistToClosest(a1))
 print(test.maxDistToClosest(a2))
 print(test.maxDistToClosest(a4))
+print(test.maxDistToClosest2(a1))
+print(test.maxDistToClosest2(a2))
+print(test.maxDistToClosest2(a4))
