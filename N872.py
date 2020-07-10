@@ -38,6 +38,7 @@ class Solution:
         check1, check2 = [], []
         getleaf(self, root1, check1)
         getleaf(self, root2, check2)
+
         if check1 == check2:
             return True
         else:
