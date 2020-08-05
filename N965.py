@@ -22,3 +22,4 @@ class Solution:
         if root.left != None and root.val != root.left.val or root.right != None and root.val != root.right.val:
             return False
         return self.isUnivalTree(root.left) and self.isUnivalTree(root.right)
+
